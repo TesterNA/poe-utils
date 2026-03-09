@@ -38,6 +38,10 @@
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
         <span>Lucky Calc</span>
       </button>
+      <button class="nav-btn" data-tool="chromatic">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
+        <span>Chromatic Calc</span>
+      </button>
     </nav>
     <div class="sidebar-footer">
       <div class="sidebar-footer-gems">
@@ -264,6 +268,106 @@
     </div>
   </div>
 
+    <div class="tool-view" id="tool-chromatic">
+      <div class="tool-page">
+        <div class="tool-header">
+          <div class="icon-pips">
+            <div class="icon-pip active"></div>
+            <div class="icon-pip active"></div>
+            <div class="icon-pip active"></div>
+          </div>
+          <h2 class="tool-title">Chromatic Calculator</h2>
+          <div class="tool-subtitle">Socket Coloring · Vorici Crafting Cost</div>
+        </div>
+
+        <div class="poe-card" style="max-width:820px;margin:0 auto;">
+          <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+          <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+
+          <div class="poe-divider"><div class="poe-divider-line"></div><div class="poe-diamond"></div><div class="poe-divider-line"></div></div>
+
+          <div class="chrom-form-grid">
+            <!-- Left column -->
+            <div>
+              <div class="section-label">Item</div>
+              <div class="poe-field">
+                <div class="poe-field-label">Total Sockets</div>
+                <input type="number" id="sockets" class="chrom-entry" placeholder="#">
+              </div>
+
+              <div class="section-label" style="margin-top:16px;">Attribute Requirements</div>
+              <div class="chrom-reqs-row">
+                <div class="chrom-req-field">
+                  <div class="chrom-req-label chrom-label-str">STR</div>
+                  <input type="number" id="str" class="chrom-entry chrom-str" placeholder="0">
+                </div>
+                <div class="chrom-req-field">
+                  <div class="chrom-req-label chrom-label-dex">DEX</div>
+                  <input type="number" id="dex" class="chrom-entry chrom-dex" placeholder="0">
+                </div>
+                <div class="chrom-req-field">
+                  <div class="chrom-req-label chrom-label-int">INT</div>
+                  <input type="number" id="int" class="chrom-entry chrom-int" placeholder="0">
+                </div>
+              </div>
+            </div>
+
+            <!-- Right column -->
+            <div>
+              <div class="section-label">Desired Socket Colors</div>
+              <div class="chrom-colors-row">
+                <div class="chrom-color-field">
+                  <div class="chrom-color-dot chrom-dot-r">R</div>
+                  <input type="number" id="red" class="chrom-entry chrom-r" placeholder="0" min="0">
+                </div>
+                <div class="chrom-color-field">
+                  <div class="chrom-color-dot chrom-dot-g">G</div>
+                  <input type="number" id="green" class="chrom-entry chrom-g" placeholder="0" min="0">
+                </div>
+                <div class="chrom-color-field">
+                  <div class="chrom-color-dot chrom-dot-b">B</div>
+                  <input type="number" id="blue" class="chrom-entry chrom-b" placeholder="0" min="0">
+                </div>
+              </div>
+
+              <button id="calcButton" class="poe-btn poe-btn-primary" style="margin-top:20px;">
+                <img src="assets/Chromatic_Orb.png" style="width:18px;height:18px;margin-right:4px;vertical-align:middle;"> Calculate
+              </button>
+            </div>
+          </div>
+
+          <div class="poe-divider"><div class="poe-divider-line"></div><div class="poe-diamond"></div><div class="poe-divider-line"></div></div>
+
+          <!-- Results -->
+          <div style="overflow-x:auto;">
+            <table class="sortable chrom-result-table" id="result">
+              <thead>
+                <tr class="prob chrom-thead-row">
+                  <th>Craft Type</th>
+                  <th>Avg Cost <span class="tablesubtitle">(chromatics)</span></th>
+                  <th>Success Chance</th>
+                  <th>Avg Attempts <span class="tablesubtitle">(mean)</span></th>
+                  <th>Cost / Try <span class="tablesubtitle">(chromatics)</span></th>
+                  <th>Std Deviation <span class="tablesubtitle">(attempts)</span></th>
+                </tr>
+              </thead>
+              <tbody id="resultbody"></tbody>
+              <tbody id="recycle"></tbody>
+            </table>
+          </div>
+
+          <div class="poe-divider"><div class="poe-divider-line"></div><div class="poe-diamond"></div><div class="poe-divider-line"></div></div>
+
+          <div class="chrom-notes">
+            <strong style="color:var(--text);">Note:</strong> Chromatic orbs cannot reroll the same color permutation twice, so the chromatic success chance is always higher than the drop rate.<br>
+            For mono-requirement items — on-color: <code>0.9 × (R+10) / (R+20)</code> · off-color: <code>0.05 + 4.5 / (R+20)</code><br>
+            For dual-requirement items — on-color: <code>0.9 × R1 / (R1+R2)</code> · off-color: <code>10%</code> flat<br>
+            <span style="color:var(--text-muted);">Original calculator by Siveran · CC0 2017</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <!-- Trade Request Modal -->
   <div class="modal-backdrop" id="requestModal" style="display:none" onclick="tradeCalc.closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
@@ -297,5 +401,7 @@
   <script src="js/defense.js"></script>
   <script src="js/exchange.js"></script>
   <script src="js/lucky.js"></script>
+  <script src="js/SortTable.min.js"></script>
+  <script src="js/PoEChromaticCalc.js"></script>
 </body>
 </html>

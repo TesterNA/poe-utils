@@ -1077,3 +1077,149 @@ input[type="range"]::-moz-range-thumb {
   .modal-actions { flex-direction: column; }
   .preset-row-inner { flex-direction: column; }
 }
+
+/* ============================================================
+   CHROMATIC CALCULATOR
+   ============================================================ */
+.chrom-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+}
+
+/* Attribute requirements row */
+.chrom-reqs-row {
+  display: flex;
+  gap: 10px;
+}
+.chrom-req-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.chrom-req-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.chrom-label-str { background: rgba(180,60,60,0.2); color: #d47070; border: 1px solid rgba(180,60,60,0.35); }
+.chrom-label-dex { background: rgba(60,160,60,0.2); color: #70c870; border: 1px solid rgba(60,160,60,0.35); }
+.chrom-label-int { background: rgba(60,80,200,0.2); color: #7090e0; border: 1px solid rgba(60,80,200,0.35); }
+
+/* Socket color fields */
+.chrom-colors-row {
+  display: flex;
+  gap: 12px;
+}
+.chrom-color-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.chrom-color-dot {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 2px solid;
+}
+.chrom-dot-r { background: rgba(180,60,60,0.25); border-color: rgba(180,60,60,0.5); color: #e08080; }
+.chrom-dot-g { background: rgba(60,160,60,0.25); border-color: rgba(60,160,60,0.5); color: #80d080; }
+.chrom-dot-b { background: rgba(60,80,200,0.25); border-color: rgba(60,80,200,0.5); color: #80a0f0; }
+
+/* Number inputs for chromatic form */
+.chrom-entry {
+  text-align: center;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  padding: 8px 6px !important;
+}
+.chrom-str:focus { border-color: rgba(180,60,60,0.6) !important; box-shadow: 0 0 0 2px rgba(180,60,60,0.12) !important; }
+.chrom-dex:focus { border-color: rgba(60,160,60,0.6) !important; box-shadow: 0 0 0 2px rgba(60,160,60,0.12) !important; }
+.chrom-int:focus { border-color: rgba(60,80,200,0.6)  !important; box-shadow: 0 0 0 2px rgba(60,80,200,0.12)  !important; }
+.chrom-r:focus   { border-color: rgba(180,60,60,0.6) !important; box-shadow: 0 0 0 2px rgba(180,60,60,0.12) !important; }
+.chrom-g:focus   { border-color: rgba(60,160,60,0.6) !important; box-shadow: 0 0 0 2px rgba(60,160,60,0.12) !important; }
+.chrom-b:focus   { border-color: rgba(60,80,200,0.6)  !important; box-shadow: 0 0 0 2px rgba(60,80,200,0.12)  !important; }
+
+/* Results table */
+.chrom-result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.chrom-result-table thead th {
+  background: rgba(200,168,75,0.07);
+  color: var(--accent);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 11px 14px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.chrom-result-table thead th:hover { background: rgba(200,168,75,0.14); }
+.chrom-result-table td {
+  padding: 9px 14px;
+  text-align: center;
+  color: var(--text);
+  border-bottom: 1px solid rgba(37,42,58,0.5);
+}
+/* Alternating rows */
+.chrom-result-table tbody tr.prob:nth-child(even) td { background: rgba(255,255,255,0.025); }
+.chrom-result-table tbody tr.prob:nth-child(odd)  td { background: transparent; }
+/* Best row highlight */
+.chrom-result-table tbody tr.best td {
+  background: rgba(200,168,75,0.09) !important;
+  color: var(--accent);
+}
+.chrom-result-table tbody tr.best:nth-child(even) td { background: rgba(200,168,75,0.12) !important; }
+
+/* Highlighted value (avg cost) */
+.chrom-result-table .highlighted {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+/* SortTable sort indicators */
+.chrom-result-table thead th.SortTable_sorted::after        { content: ' ▲'; font-size: 10px; color: var(--accent-dim); }
+.chrom-result-table thead th.SortTable_sorted_reverse::after { content: ' ▼'; font-size: 10px; color: var(--accent-dim); }
+
+/* Notes block */
+.chrom-notes {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+.chrom-notes code {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1px 5px;
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .chrom-form-grid { grid-template-columns: 1fr; gap: 20px; }
+  .chrom-result-table { font-size: 12px; }
+  .chrom-result-table td, .chrom-result-table th { padding: 7px 8px; }
+}

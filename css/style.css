@@ -1223,3 +1223,149 @@ input[type="range"]::-moz-range-thumb {
   .chrom-result-table { font-size: 12px; }
   .chrom-result-table td, .chrom-result-table th { padding: 7px 8px; }
 }
+
+/* ============================================================
+   EXP PENALTY CALCULATOR
+   ============================================================ */
+.tablesubtitle {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: none;
+}
+
+/* Result value colors by penalty severity */
+.xp-text-full   { color: #5bbd7d; text-shadow: 0 0 30px rgba(74,158,106,0.5); }
+.xp-text-min    { color: var(--accent); text-shadow: 0 0 30px rgba(200,168,75,0.5); }
+.xp-text-mod    { color: #d98a3a; text-shadow: 0 0 30px rgba(217,138,58,0.45); }
+.xp-text-heavy  { color: #cf5a4e; text-shadow: 0 0 30px rgba(184,64,64,0.45); }
+.xp-text-severe { color: #b84040; text-shadow: 0 0 30px rgba(184,64,64,0.55); }
+
+/* Status pill below the big number */
+.exp-status {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 5px 16px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.exp-status.xp-full   { color: #5bbd7d; border-color: rgba(74,158,106,0.45); background: rgba(74,158,106,0.1); }
+.exp-status.xp-min    { color: var(--accent); border-color: var(--accent-dim); background: rgba(200,168,75,0.1); }
+.exp-status.xp-mod    { color: #d98a3a; border-color: rgba(217,138,58,0.45); background: rgba(217,138,58,0.1); }
+.exp-status.xp-heavy  { color: #cf5a4e; border-color: rgba(184,64,64,0.45); background: rgba(184,64,64,0.1); }
+.exp-status.xp-severe { color: #d05050; border-color: rgba(184,64,64,0.6); background: rgba(184,64,64,0.14); }
+
+/* Full XP band line */
+.exp-band-line {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(74,158,106,0.06);
+  border: 1px solid rgba(74,158,106,0.25);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.exp-band-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.exp-band-value {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #5bbd7d;
+}
+/* When no penalty-free area exists, recolor the band line to gold (best-effort) */
+.exp-band-line.exp-band-line-warn {
+  background: rgba(200,168,75,0.06);
+  border-color: var(--accent-dim);
+}
+.exp-band-line-warn .exp-band-value { color: var(--accent); }
+
+/* Reference table */
+.exp-table-wrap {
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+.exp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.exp-table thead th {
+  position: sticky;
+  top: 0;
+  background: #11131c;
+  color: var(--accent);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  z-index: 1;
+}
+.exp-table th:first-child, .exp-table td:first-child { padding-left: 16px; }
+.exp-table td {
+  padding: 7px 14px;
+  color: var(--text);
+  border-bottom: 1px solid rgba(37,42,58,0.4);
+  font-weight: 500;
+}
+.exp-table tbody tr:last-child td { border-bottom: none; }
+.exp-table .exp-pct {
+  text-align: right;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* XP bar inside table cell */
+.exp-bar-wrap {
+  width: 100%;
+  min-width: 90px;
+  height: 8px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.exp-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.2s;
+}
+
+/* Per-severity coloring for table rows */
+.exp-row.xp-full   .exp-bar { background: #4a9e6a; }
+.exp-row.xp-min    .exp-bar { background: var(--accent); }
+.exp-row.xp-mod    .exp-bar { background: #d98a3a; }
+.exp-row.xp-heavy  .exp-bar { background: #b84040; }
+.exp-row.xp-severe .exp-bar { background: #7a2e2e; }
+.exp-row.xp-full   .exp-pct { color: #5bbd7d; }
+.exp-row.xp-min    .exp-pct { color: var(--accent); }
+.exp-row.xp-mod    .exp-pct { color: #d98a3a; }
+.exp-row.xp-heavy  .exp-pct { color: #cf5a4e; }
+.exp-row.xp-severe .exp-pct { color: #b05050; }
+
+/* Highlight the currently-selected area level */
+.exp-row-current td {
+  background: rgba(200,168,75,0.1);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.exp-row-current td:first-child { color: var(--accent); font-weight: 700; }

@@ -19,6 +19,15 @@ const expCalc = (function () {
     return monsterLevel;
   }
 
+  // Map tier for an area level (T1–T16). Differs by game:
+  //   PoE 1: T1 = area level 68 … T16 = 83
+  //   PoE 2: T1 = area level 65 … T16 = 80
+  // Returns null outside that range (no tier shown above/below).
+  function mapTier(areaLevel, game) {
+    const t = areaLevel - (game === 'poe2' ? 64 : 67);
+    return (t >= 1 && t <= 16) ? t : null;
+  }
+
   function compute(level, monsterLevel, game) {
     const effML  = effectiveMonsterLevel(monsterLevel, game);
     const safe   = safeZone(level);
@@ -80,9 +89,10 @@ const expCalc = (function () {
       const cat = category(r.mult);
       const pct = r.mult * 100;
       const delta = z - level;
+      const tier = mapTier(z, game);
       rows +=
         '<tr class="exp-row xp-' + cat.key + (z === currentZone ? ' exp-row-current' : '') + '">' +
-          '<td>' + z + '</td>' +
+          '<td>' + z + (tier ? ' <span class="exp-tier">T' + tier + '</span>' : '') + '</td>' +
           '<td>' + (delta > 0 ? '+' : '') + delta + '</td>' +
           '<td><div class="exp-bar-wrap"><div class="exp-bar" style="width:' + pct.toFixed(1) + '%"></div></div></td>' +
           '<td class="exp-pct">' + fmtPct(r.mult) + '</td>' +

@@ -171,10 +171,12 @@ const expCalc = (function () {
       (game === 'poe1' && level >= 95) ? 'block' : 'none';
   }
 
-  // Re-run on tab open so the auto-scroll positions correctly (initial run
-  // happens while the view is hidden, where measurements are unavailable).
-  const navBtn = document.querySelector('.nav-btn[data-tool="exp"]');
-  if (navBtn) navBtn.addEventListener('click', function () { setTimeout(calculate, 0); });
+  // Re-run whenever this tool becomes visible (click, hash route, or
+  // back/forward) so the table auto-scroll can position — measurements need a
+  // visible view, and the initial run may happen while it's still hidden.
+  window.addEventListener('tool:shown', function (e) {
+    if (e.detail && e.detail.tool === 'exp') setTimeout(calculate, 0);
+  });
 
   calculate();
   return { calculate };

@@ -22,11 +22,7 @@
       <div class="sidebar-divider-line"></div>
     </div>
     <nav class="sidebar-nav">
-      <button class="nav-btn active" data-tool="trade">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg>
-        <span>Trade Calc</span>
-      </button>
-      <button class="nav-btn" data-tool="defense">
+      <button class="nav-btn active" data-tool="defense">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-4 9-8 10C8 21 4 17 4 12V6z"/></svg>
         <span>Defense Calc</span>
       </button>
@@ -45,6 +41,10 @@
       <button class="nav-btn" data-tool="exp">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
         <span>EXP Penalty</span>
+      </button>
+      <button class="nav-btn" data-tool="trade">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg>
+        <span>Bulk Trade Calc</span>
       </button>
     </nav>
     <div class="sidebar-footer">
@@ -70,8 +70,8 @@
     </header>
 
     <!-- Tools -->
-    <div class="tool-view active" id="tool-trade"></div>
-    <div class="tool-view" id="tool-defense">
+    <div class="tool-view" id="tool-trade"></div>
+    <div class="tool-view active" id="tool-defense">
       <!-- Defense calculator -->
       <div class="tool-page">
         <div class="tool-header">

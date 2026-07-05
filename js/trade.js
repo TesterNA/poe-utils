@@ -369,8 +369,16 @@ const tradeCalc = (function () {
           <div class="icon-pip active"></div>
           <div class="icon-pip active"></div>
         </div>
-        <h2 class="tool-title">Trade Calculator</h2>
+        <h2 class="tool-title">Bulk Trade Calculator</h2>
         <div class="tool-subtitle">Quantities · Prices · Presets · Request Generator</div>
+      </div>
+
+      <div class="tool-intro">
+        <strong>Bulk-selling helper.</strong> Track everything you're selling in one place —
+        add a card per product (name · quantity · price · Divine/Chaos), mark amounts as
+        <em>sold</em>, and get live totals in Divine and Chaos. Save reusable presets
+        (e.g. beasts, currency), share them via export/import, and hit
+        <strong>Generate Request</strong> to produce a ready-to-paste WTS message for trade chat.
       </div>
 
       <div class="trade-header-row">

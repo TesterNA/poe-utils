@@ -258,6 +258,22 @@ body::before {
   margin-top: 4px;
 }
 
+/* Intro / description panel under a tool header */
+.tool-intro {
+  max-width: 760px;
+  margin: 0 auto 24px;
+  padding: 14px 18px;
+  background: rgba(200,168,75,0.04);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
+  border-radius: 3px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+.tool-intro strong { color: var(--accent); font-weight: 600; }
+.tool-intro em { color: var(--text); font-style: normal; }
+
 /* ============================================================
    POE CARD
    ============================================================ */
